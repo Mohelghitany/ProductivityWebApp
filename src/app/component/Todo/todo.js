@@ -120,104 +120,113 @@ export default function Todo() {
     return (
         <>
         <div id="task" className="todo-card">
-            <button id="bot" className="bg-white-500 hover:bg-black-200 text-black py-2 px-2 rounded" onClick={()=>openmodal()}>Add New Task</button>
-        </div>
-        <div className="grid grid-cols-3 gap-6">
-            <div className="done-container">
-                <div className="todo-header">
+                <button id="bot" className="bg-white-500 hover:bg-black-200 text-black py-2 px-2 rounded" onClick={() => openmodal()}>Add New Task</button>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-6">
+                <div className="done-container">
+                    <div className="todo-header">
+                        <div className="todo-card">
+                            <h1 className="todo-h1">Todo</h1>
+                            <p className="todo-p1">{todoList}</p>
+                        </div>
+                    </div>
+                    <div className="todo-body">
+                        {taskList.map((task, index) => (
+                            <div className="todo-item" key={index} style={{ backgroundColor: task.color }}>
+                                <h3>{task.name}</h3>
+                                <p>{task.details}</p>
+
+                                {task.subtasks && (
+                                    <ul>
+                                        {task.subtasks.map((subtask, subIndex) => (
+                                            <li key={subIndex}>{subtask}
+                                              
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                                <div className="task-menu">
+                                    <div className="three-dots" onClick={(e) => {
+                                        e.stopPropagation(); // Prevent event bubbling
+                                        const menuContent = e.currentTarget.nextElementSibling;
+                                        menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block'; // Toggle menu display
+                                    }}>...</div>
+                                    <div className="menu-content">
+                                        <button onClick={() => handleEditTask(index)}>Edit Task</button>
+                                        <button onClick={() => handleDeleteTask(index)}>Delete Task</button>
+                                        <button onClick={() => moveTaskToDoing(index)}>Move to Doing</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            
+             <div className="done-container">
+                    <div className="todo-header">
+                        <div className="todo-card">
+                            <h1 className="todo-h1">Doing</h1>
+                            <p className="todo-p">{doingList}</p>
+                        </div>
+                    </div>
+                    <div className="todo-body">
+                        {doingTasks.map((task, index) => (
+                            <div className="todo-item" key={index} style={{ backgroundColor: task.color }}>
+                                <h3>{task.name}</h3>
+                                <p>{task.details}</p>
+
+                                {task.subtasks && (
+                                    <ul>
+                                        {task.subtasks.map((subtask, subIndex) => (
+                                            <li key={subIndex}>{subtask}
+                                               
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                                
+                                <div className="task-menu">
+                                    <div className="three-dots" onClick={(e) => {
+                                        e.stopPropagation();
+                                        const menuContent = e.currentTarget.nextElementSibling;
+                                        menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+                                    }}>...</div>
+                                    <div className="menu-content">
+                                        
+                                        <button onClick={() => moveTaskToDone(index)}>Move to Done</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Done Section */}
+                <div className="done-container">
                     <div className="todo-card">
-                        <h1 className="todo-h1">Todo</h1>
-                        <p className="todo-p1">{todoList}</p>
-                    </div>    
-                </div>
-                <div className="todo-body">
-                    {taskList.map((task,index)=>(
-                        <div className="todo-item" key={index} style={{ backgroundColor: task.color }}> {/* Apply task color */}
-                            <h3>{task.name}</h3>
-                            <p>{task.details}</p>
-                            {task.subtasks && (
-                            <ul>
-                                {task.subtasks.map((subtask, subIndex) => (
-                                    <li key={subIndex}>- {subtask}</li>
-                                ))}
-                            </ul>
-                            )}
-                            <div className="flex gap-2 mt-2">
-                                <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded"
-                                    onClick={() => moveTaskToDoing(index)}
-                                >
-                                    Move to Doing
-                                </button>
-                                <button
-                                    className="bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-3 rounded"
-                                    onClick={() => handleEditTask(index)}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded"
-                                    onClick={() => handleDeleteTask(index)}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div> 
-            </div>
-            <div className="done-container">
-                <div className="todo-card">
-                    <h1 className="todo-h1">Doing</h1>
-                    <p className="todo-p">{doingList}</p>
-                </div>
-                <div className="todo-body">
-                    {doingTasks.map((task, index) => (
-                        <div className="todo-item" key={index} style={{ backgroundColor: task.color }}>
-                            <h3>{task.name}</h3>
-                            <p>{task.details}</p>
+                        <h1 className="todo-h1">Done</h1>
+                        <p className="todo-p2">{doneList}</p>
+                    </div>
+                    <div className="todo-body">
+                        {doneTasks.map((task, index) => (
+                            <div className="todo-item" key={index} style={{ backgroundColor: task.color }}>
+                                <h3>{task.name}</h3>
+                                <p>{task.details}</p>
 
-                            {task.subtasks && (
-                                <ul>
-                                    {task.subtasks.map((subtask, subIndex) => (
-                                        <li key={subIndex}>- {subtask}</li>
-                                    ))}
-                                </ul>
-                            )}
-                             <div className="flex gap-2 mt-2">
-                                <button
-                                    className="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded"
-                                    onClick={() => moveTaskToDone(index)}
-                                >
-                                    Move to Done
-                                </button>
+                                {task.subtasks && (
+                                    <ul>
+                                        {task.subtasks.map((subtask, subIndex) => (
+                                            <li key={subIndex}>{subtask}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                                
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
-            <div className="done-container">
-                <div className="todo-card">
-                    <h1 className="todo-h1">Done</h1>
-                    <p className="todo-p2">{doneList}</p>
-                </div>
-                <div className="todo-body">
-                    {doneTasks.map((task, index) => (
-                        <div className="todo-item" key={index} style={{ backgroundColor: task.color }}>
-                            <h3>{task.name}</h3>
-                            <p>{task.details}</p>
-
-                            {task.subtasks && (
-                                <ul>
-                                    {task.subtasks.map((subtask, subIndex) => (
-                                        <li key={subIndex}>- {subtask}</li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    ))}
-                </div>
-            </div>
+           
 
             {Modal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
