@@ -3,6 +3,7 @@ import Taps from "../app/component/taps/taps";
 import { useCallback, useState } from "react";
 import ToDo from "../app/component/Todo/todo";
 import Timer from "../app/component/timer/timer";
+import Notes from "../app/component/note/note";
 
 export default function Home() {
 
@@ -15,7 +16,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Taps onTabClick={handleTabClick} />
         {selectedTab === 'ToDo' && <ToDo />}
-        {/* {selectedTab === 'Notes' && <Notes />} */}
+        {selectedTab === 'Notes' && <Notes />}
         {selectedTab === 'Timer' && <Timer />}
         </main>
     </div>
