@@ -315,8 +315,8 @@ function moveTaskToDone(index) {
 
         
     {Modal && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
+      <div id="modal" className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div id="modal-content" className="bg-white p-8 rounded-lg shadow-lg">
           <h2 className="text-lg font-bold mb-4">Add New Task</h2>
 
           <input
@@ -416,7 +416,7 @@ function moveTaskToDone(index) {
               className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded mr-2"
               onClick={() => closemodal()}
             >
-              Cancel
+              &larr; Back
             </button>
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"

@@ -143,7 +143,7 @@ export default function Notes1() {
                   placeholder="Tag #.." 
                   className="add-tag" 
                 />
-                <button type="button" 
+                <button id='button-tag' type="button" 
                   className="tag-button"
                   onClick={ButtonTag}
                 >
@@ -181,7 +181,7 @@ export default function Notes1() {
               </div>
 
               <div className="edit-buttons">
-                <button type="button" className="close" onClick={() => setModalOpen(false)}>Back</button>
+                <button type="button" className="close" onClick={() => setModalOpen(false)}>&larr;  Back</button>
                 <button type="submit" className="done">Done</button>
               </div>
             </form>

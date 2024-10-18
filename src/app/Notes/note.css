@@ -7,7 +7,10 @@
     align-items: center;
 
 }
-
+#button-tag{
+    margin: 0 10px;
+    height: inherit;
+}
 .search {
     padding: 10px;
     width: 60%;
@@ -18,7 +21,7 @@
     display: none;
 }
 
-/* Form Input */
+
 .all {
     display: flex;
     flex-direction: column;
@@ -44,11 +47,12 @@
     border: 2px solid #ccc;
 }
 
-/* Tag Input */
+
 .tags {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+    
 }
 
 .add-tag {
@@ -56,6 +60,7 @@
     margin-right: 10px;
     border-radius: 5px;
     border: 2px solid #ccc;
+    flex-grow: 0.6;
 }
 
 .tag-button {
@@ -71,7 +76,7 @@
     background-color: #626458;
 }
 
-/* Tag Key Styling */
+
 .key {
     background-color: gray;
     color: #f2f2f2;
@@ -84,7 +89,7 @@
     margin-bottom: 15px;
 }
 
-/* Palette Color */
+
 .palette {
     display: flex;
     justify-content: center;
@@ -95,7 +100,7 @@
     margin-right: 10px;
 }
 
-/* Edit and Done Buttons */
+
 .edit-buttons {
     margin-top: 20px;
     padding: 25px;
@@ -131,7 +136,6 @@
     background-color: #dcd0d0cc;
 }
 
-/* Card Styling */
 .card {
     width: 80%;
     margin: 20px auto;
@@ -171,7 +175,7 @@
     margin-top: 10px;
 }
 
-/* delete &&&  edit Buttons  */
+
 .delete,
 .edit {
     background-color: #273343;
@@ -183,13 +187,13 @@
     cursor: pointer;
 }
 
-/* button edit & delete */
+
 .But-ED {
     display: flex;
     padding: 10px;
 }
 
-/* Span Tags for Bold Text */
+
 span {
     font-weight: bold;
     margin-right: 10px;
@@ -206,10 +210,13 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    backdrop-filter: blur(8px);
 }
 
 .modal-content {
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
     width: 500px;
@@ -221,7 +228,6 @@ span {
     background-color: #000000;
     color: white;
     border: none;
-
     cursor: pointer;
     border-radius: 5px;
 }
@@ -231,7 +237,7 @@ button {
 }
 
 .close {
-    background-color: #d9534f;
+    background-color: #d26a66;
     color: white;
     border: none;
     padding: 10px;
@@ -240,7 +246,7 @@ button {
 }
 
 .done {
-    background-color: #5cb85c;
+    background-color: #70b970;
     color: white;
     border: none;
     padding: 10px;
