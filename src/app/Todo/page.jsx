@@ -19,7 +19,19 @@ export default function Todo() {
   const [editedSubtask, setEditedSubtask] = useState("");
   const [doingTasks, setDoingTasks] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
-
+    const colors = [  
+    '#4A593D', 
+    '#6C8672',
+    '#8BA382',  
+    '#D99E73', 
+    '#F2C78F',
+    '#FF5E57',
+    '#D9534F', 
+    '#A9C1A9'
+  ];
+  function handleColorSelection(selectedColor) {
+  setTaskColor(selectedColor); 
+}
   useEffect(() => {
   const storedTasks = JSON.parse(localStorage.getItem("taskList")) || [];
   const storedDoingTasks = JSON.parse(localStorage.getItem("doingTasks")) || [];
@@ -301,103 +313,121 @@ function moveTaskToDone(index) {
           </div>
         </div>
 
-        {Modal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h2 className="text-lg font-bold mb-4">Add New Task</h2>
+        
+    {Modal && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-lg font-bold mb-4">Add New Task</h2>
 
-              <input
-                type="text"
-                placeholder="Task Name"
-                className="border border-gray-300 rounded p-2 w-full mb-4"
-                value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Task Details"
-                className="border border-gray-300 rounded p-2 w-full mb-4"
-                value={taskdetails}
-                onChange={(e) => setTaskdetails(e.target.value)}
-              />
-              
-              <input
-                type="color"
-                value={taskColor}
-                onChange={(e) => setTaskColor(e.target.value)}
-                className="mb-4"
-              />
+          <input
+            type="text"
+            placeholder="Task Name"
+            className="border border-gray-300 rounded p-2 w-full mb-4"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Task Details"
+            className="border border-gray-300 rounded p-2 w-full mb-4"
+            value={taskdetails}
+            onChange={(e) => setTaskdetails(e.target.value)}
+          />
 
-              <div className="subtask-container">
-                <h3 className="text-md mb-2">Subtasks</h3>
-                <input
-                  type="text"
-                  placeholder="Subtask Name"
-                  className="border border-gray-300 rounded p-2 w-full mb-2"
-                  value={subtaskName}
-                  onChange={(e) => setSubtaskName(e.target.value)}
-                />
-                <button
-                  className="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded"
-                  onClick={handleAddSubtask}>
-                  Add Subtask
-                </button>
-
-                <ul className="list-disc pl-4 mt-2">
-                  {subtasks.map((subtask, index) => (
-                    <li
-                      key={index}
-                      className="flex justify-between items-center mb-2">
-                      {editingIndex === index ? (
-                        <>
-                          <input
-                            type="text"
-                            value={editedSubtask}
-                            onChange={(e) => setEditedSubtask(e.target.value)}
-                          />
-                          <button
-                            className="ml-2 bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded"
-                            onClick={handleUpdateSubtask}>
-                            Save
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <span>{subtask}</span>
-                          <div className="flex gap-2">
-                            <button
-                              className="ml-2 bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded"
-                              onClick={() => handleEditSubtask(index)}>
-                              Edit
-                            </button>
-                            <button
-                              className="ml-2 bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded"
-                              onClick={() => handleDeleteSubtask(index)}>
-                              Delete
-                            </button>
-                          </div>
-                        </>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex justify-end mt-4">
-                <button
-                  className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded mr-2"
-                  onClick={() => closemodal()}>
-                  Cancel
-                </button>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
-                  onClick={handleAddTask}>
-                  {editingTaskIndex > -1 ? "Update Task" : "Add Task"}
-                </button>
-              </div>
+          
+          <div className="color-picker mb-4">
+            <h3>Select Task Color:</h3>
+            <div className="flex gap-2">
+              {colors.map((color, index) => (
+                <div
+                  key={index}
+                  className={`w-8 h-8 rounded-full cursor-pointer border ${taskColor === color ? 'border-black' : ''}`}
+                  style={{ backgroundColor: color }}
+                  onClick={() => handleColorSelection(color)}
+                ></div>
+              ))}
             </div>
           </div>
-        )}
+
+          
+          <div className="subtask-container">
+            <h3 className="text-md mb-2">Subtasks</h3>
+            <input
+              type="text"
+              placeholder="Subtask Name"
+              className="border border-gray-300 rounded p-2 w-full mb-2"
+              value={subtaskName}
+              onChange={(e) => setSubtaskName(e.target.value)}
+            />
+            <button
+              className="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded"
+              onClick={handleAddSubtask}
+            >
+              Add Subtask
+            </button>
+
+            <ul className="list-disc pl-4 mt-2">
+              {subtasks.map((subtask, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between items-center mb-2"
+                >
+                  {editingIndex === index ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editedSubtask}
+                        onChange={(e) => setEditedSubtask(e.target.value)}
+                      />
+                      <button
+                        className="ml-2 bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded"
+                        onClick={handleUpdateSubtask}
+                      >
+                        Save
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>{subtask}</span>
+                      <div className="flex gap-2">
+                        <button
+                          className="ml-2 bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded"
+                          onClick={() => handleEditSubtask(index)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="ml-2 bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded"
+                          onClick={() => handleDeleteSubtask(index)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          
+          <div className="flex justify-end mt-4">
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded mr-2"
+              onClick={() => closemodal()}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+              onClick={handleAddTask}
+            >
+              {editingTaskIndex > -1 ? "Update Task" : "Add Task"}
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
       </div>
     </>
   );

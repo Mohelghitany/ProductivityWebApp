@@ -1,3 +1,4 @@
+
 .todo-h1 {
     display: inline;
 }
@@ -42,12 +43,21 @@
     border: 1px solid #000000;
     border-radius: 10px;
     background-color: rgb(235, 237, 239);
+    z-index: 0;
 }
 
 #task {
     text-align: center;
-    margin: 0px;
+    margin: 50px;
     height: 60px;
+    width: 800px;
+}
+#bot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+   padding: 0 !important;
 }
 
 .todo-body {
@@ -71,11 +81,12 @@
     width: 200px;
     background-color: rgb(255, 255, 255);
     position: relative;
+   
     
 }
 
 .todo-item:hover {
-    transform: translate(0, -5px);
+    transform:rotate(1deg);
 }
 
 #bot {
@@ -88,23 +99,26 @@
 
 .task-menu {
     position: absolute;
-    
     top: 10px;
-   
     right: 10px;
-  
     display: inline-block;
+    z-index: 100;
 }
-
 .menu-content {
     display: none;
     position: absolute;
+    top: 100%;
     right: 0;
     background-color: white;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    min-width: 150px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 5px;
 }
+
+
+
 
 .menu-content button {
     background-color: white;
@@ -113,6 +127,7 @@
     width: 100%;
     text-align: left;
     cursor: pointer;
+    
 }
 
 .menu-content button:hover {
@@ -130,13 +145,9 @@
 
 .todo-item ul {
     list-style-type: none;
-    
-    padding: 0;
-    
+    padding: 0; 
     margin: 0;
-    
     border-radius: 15px;
-   
     overflow: hidden;
     
 }
