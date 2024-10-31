@@ -64,6 +64,11 @@ const CountdownTimer = () => {
     setTimers(updatedTimers);
     saveTimersToLocalStorage(updatedTimers);
   };
+  const Deleter = (index) => {
+    const updatedTimers = timers.filter((timer, idx) => idx !== index);
+    setTimers(updatedTimers);
+    saveTimersToLocalStorage(updatedTimers);
+  };
 
   useEffect(() => {
     const storedTimers = loadTimersFromLocalStorage();
@@ -74,16 +79,19 @@ const CountdownTimer = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimers((prevTimers) =>
-        prevTimers.map((timer) => {
-          if (timer.isActive && timer.time > 0) {
-            const updatedTimer = { ...timer, time: timer.time - 1 };
-            saveTimersToLocalStorage(prevTimers);
-            return updatedTimer;
-          }
-          return timer;
-        })
-      );
+      setTimers((prevTimers) => {
+        const updatedTimers = prevTimers
+          .map((timer) => {
+            if (timer.isActive && timer.time > 0) {
+              return { ...timer, time: timer.time - 1 };
+            }
+            return timer;
+          })
+          .filter((timer) => timer.time > 0); 
+
+        saveTimersToLocalStorage(updatedTimers);
+        return updatedTimers;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
@@ -123,6 +131,15 @@ const CountdownTimer = () => {
                   <div className="flex gap-2">
                     <div className="bg-black px-[20px] py-[4px] rounded-full text-[20px] text-white">
                       {formatTime(timer.time)} left
+                    </div>
+                    <div className="timer-controls">
+                      <button
+                        onClick={() => Deleter(index)}
+                        className={`timer-button ${
+                          timer.isActive ? "opacity-100" : "opacity-35"
+                        }`}>
+                        {"Delete"}
+                      </button>
                     </div>
                     <div className="timer-controls">
                       <button

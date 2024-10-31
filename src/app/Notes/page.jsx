@@ -149,16 +149,14 @@ export default function Notes1() {
                 >
                   Add Tag
                 </button>
-
-                
-                <div className="tag-list">
+              </div>
+              <div className="tag-list">
                   {tempTags.map((tag, tagIndex) => (
                     <div key={tagIndex} className="tag-item">
-                      <span>#{tag}</span>
+                      <span>{tag}</span>
                       <button type="button" onClick={() => deleteTempTag(tagIndex)}>X</button>
                     </div>
                   ))}
-                </div>
               </div>
 
               <div className="palette">
